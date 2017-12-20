@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    note: $('#user-note').val()
+                };
+                $.ajax({
+                    url: "/users",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                    }
+                });
+            });
+        });
+        
+function refreshPage(){
+    window.location.reload();
+        window.location.reload();
+
+} 
+function deleteid(id)
+{
+   
+
+
+    window.location = "http://localhost:3000/"+String(id);
+}
+    </script>
+  </head>
+       <link rel="stylesheet" href="./styles/style.css">
+<link href='https://fonts.googleapis.com/css?family=Balthazar' rel='stylesheet'>
+  <body>
+    <h1 align="center" style="font-style: italic;color: white;font-family: 'Balthazar';">NOTE APP USING NODEJS+MYSQL+EXPRESS </h3>
+    <textarea id="user-note" type="text" rows="10" cols="100" placeholder="Enter note here!"/></textarea>
+    <input id="user-submit" type="submit" onclick="refreshPage()" value="ADD NOTE"/><br>
+
+
+    <p id="output1"></p>
+<table >
+  <tr>
+    <th>ID</th>
+    <th>Note</th>
+    <th>Delete</th>
+  </tr>
+  <% if(data.length){ 
+    for(var i = 0;i < data.length;i++) { %>
+  <tr>
+    <td><%=data[i].id%></td>
+    <td><%=data[i].note%></td>
+    <td> <input  type="submit" onclick="deleteid(<%=data[i].id%>)" value="DELETE NOTE" /></td>
+  </tr>
+  <% }
+  }else{ %>
+  <tr>
+    <td colspan="3">No user</td>
+  </tr>
+<% } %>
+</table>  
+  </body>
+</html>
